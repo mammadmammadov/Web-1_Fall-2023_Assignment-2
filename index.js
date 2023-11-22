@@ -33,5 +33,14 @@ function displayProducts(products) {
                 <img src="${product.thumbnail}" alt="${product.title}">`;
 
     productList.appendChild(productElement);
+
+    document.querySelectorAll(".product").forEach(function(element) {
+      element.addEventListener("click", function() {
+        window.open('detail.html', "_blank");
+      });
+    });
+
   });
 }
+
+
