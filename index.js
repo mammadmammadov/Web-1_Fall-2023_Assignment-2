@@ -1,16 +1,17 @@
+
 fetch("https://dummyjson.com/products")
-  .then((response) => {
-    return response.json();
+  .then((res) => {
+    return res.json();
   })
   .then((data) => {
     const products = data.products
     // console.log(products);
     displayProducts(products);
+
   })
   .catch((error) => {
     console.error("Error while getting the data", error);
   });
-
 
 
 function displayProducts(products) {
@@ -27,6 +28,7 @@ function displayProducts(products) {
     productElement.classList.add("grid-item");
 
     productElement.innerHTML = `
+                <h4 class="product-id">${product.id}</h4>
                 <h3>${product.title}</h3>
                 <p>Price: $${product.price}</p>
                 <p>Discount: ${product.discountPercentage}%</p>
@@ -34,20 +36,27 @@ function displayProducts(products) {
                 <p>Stock: ${product.stock}</p>
                 <img src="${product.thumbnail}" alt="${product.title}">`;
 
+    productElement.addEventListener("click", function() {
+      const productInfoURL = `product_info.html?id=${product.id}`;
+      window.open(productInfoURL, "_blank");
+    });
+
     productList.appendChild(productElement);
 
   });
 }
 
-  $(".product").click(function(){
-    $(document).on("click" , function() {
-      $(this).addClass(".orange");
-  });
-  })
+// const container = document.getElementById("productList");
+// container.addEventListener('click', function(event){
+//   console.log(event.target.parentNode);
+//   window.open("https://www.youtube.com/watch?v=023Psne_-_4", '_blank');
 
-  document.getElementsByClassName(".product").addEventListener(
-    "click", func, false);
 
-  function func(){
-    console.log("Hello");
-  }
+
+
+// })
+
+// const openProductDetailsPage = (productId) => {
+//   const url = `https://example.com/product-details/${productId}`;
+//   window.open(url, '_blank');
+// };
