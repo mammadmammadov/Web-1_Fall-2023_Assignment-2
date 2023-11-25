@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", displaySingleProduct())
+
 function displaySingleProduct(){
   const productId = new URLSearchParams(window.location.search).get("id");
   const url = `https://dummyjson.com/products/${productId}`
@@ -7,17 +9,16 @@ function displaySingleProduct(){
         const productInfoSet = document.getElementById("productInfoSet");
         productInfoSet.innerHTML = `
               <h3>${product.title}</h3>
-              <p>Price: ${product.price}</p>
+              <p>Price: $${product.price}</p>
               <p>Discount: ${product.discountPercentage}%</p>
               <p>Category: ${product.category}</p>
               <p>Stock: ${product.stock}</p>
-              <div id="images"></div>`;
+              <div id="pictures"></div>`;
         const imageSet =
-          productInfoSet.querySelector("#images");
+          productInfoSet.querySelector("#pictures");
         product.images.map((image) => {
           const pic = document.createElement("img");
-          pic.src = image;
-          pic.alt = product.description;
+          [pic.src, pic.alt] = [image, product.description];
           imageSet.appendChild(pic);
         });
       }).catch((error) => {
@@ -25,4 +26,3 @@ function displaySingleProduct(){
       })
 }
 
-document.addEventListener("DOMContentLoaded", displaySingleProduct())
