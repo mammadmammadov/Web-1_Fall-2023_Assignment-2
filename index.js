@@ -22,6 +22,7 @@ function displayProducts(products) {
     productElement.classList.add("product");
     productElement.classList.add("grid-item");
 
+    //change below to template instead
     productElement.innerHTML = `
                 <h4 class="product-id">${product.id}</h4>
                 <h3>${product.title}</h3>
@@ -31,11 +32,27 @@ function displayProducts(products) {
                 <p>Stock: ${product.stock}</p>
                 <img src="${product.thumbnail}" alt="${product.title}">`;
 
-    productElement.addEventListener("click", function(){
+    productElement.addEventListener("click", function () {
       const productInfoURL = `product_info.html?id=${product.id}`;
       window.open(productInfoURL, "_blank");
     });
 
     productList.appendChild(productElement);
+
+    //Below Searching Function is Implemented
+    const searchInput = document.querySelector("[data-search]");
+    if (searchInput != null) {
+      searchInput.addEventListener("keyup", (e) => {
+        const value = e.target.value;
+
+        const isVisible = product.title.trim().toLowerCase().includes(value.toLowerCase()) || 
+        product.description.trim().toLowerCase().includes(value.toLowerCase()) ||
+        product.category.trim().toLowerCase().includes(value.toLowerCase());
+
+        productElement.classList.toggle("hide", !isVisible);
+        
+      });
+    }
   });
 }
+

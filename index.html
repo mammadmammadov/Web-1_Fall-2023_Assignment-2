@@ -7,18 +7,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/search_bar.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
   <body>
+    <div class="search-wrapper">
+      <label for="search">Search Elements</label>
+      <input type="search" id="search" data-search />
+    </div>
 
-    <div class="wrap">
-      <div class="search">
-         <input type="text" class="searchTerm" id="search-input" placeholder="What are you looking for?">
-         <button type="submit" class="searchButton">
-           <i class="fa fa-search"></i>
-        </button>
-      </div>
-   </div>
+    <label for="productCategories">Choose a category:</label>
+    <select name="productCategories" id="categories">
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </select>
 
     <div class="grid-container" id="productList"></div>
 

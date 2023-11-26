@@ -88,3 +88,7 @@ p{
   .product-id{
     display: none;
   }
+
+  .hide{
+    display: none;
+  }

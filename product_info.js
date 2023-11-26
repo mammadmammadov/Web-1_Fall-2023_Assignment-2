@@ -9,10 +9,12 @@ function displaySingleProduct(){
         const productInfoSet = document.getElementById("productInfoSet");
         productInfoSet.innerHTML = `
               <h3>${product.title}</h3>
+              <p>${product.description}</p>
               <p>Price: $${product.price}</p>
               <p>Discount: ${product.discountPercentage}%</p>
               <p>Category: ${product.category}</p>
               <p>Stock: ${product.stock}</p>
+              <p>Rating: ${product.rating}</p>
               <div id="pictures"></div>`;
         const imageSet =
           productInfoSet.querySelector("#pictures");
