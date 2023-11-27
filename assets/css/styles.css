@@ -65,16 +65,15 @@ p{
 }
 
 .grid-container {
-    margin-top: 5%;
-    display: inline-grid;
-    grid-template-columns: auto auto auto;
-    background-color: rgb(49, 222, 175);
-    padding: 5px;
-    gap:10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+  padding: 20px;
   }
   
   .grid-item {
-    background-color: rgb(235, 235, 157);
+    background-color: #fff;
+    border: 1px solid #ddd;
     border: 1px solid rgba(0, 0, 0, 0.8);
     padding: 5px;
     font-size: 30px;
