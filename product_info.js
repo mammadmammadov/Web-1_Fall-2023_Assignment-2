@@ -9,6 +9,7 @@ function displaySingleProduct(){
         const productInfoSet = document.getElementById("productInfoSet");
         productInfoSet.innerHTML = `
               <h3>${product.title}</h3>
+              <p style="font-weight:bold">${product.brand}</p>
               <p>${product.description}</p>
               <p>Price: $${product.price}</p>
               <p>Discount: ${product.discountPercentage}%</p>

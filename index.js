@@ -12,15 +12,31 @@ fetch("https://dummyjson.com/products")
   });
 
 function displayProducts(products) {
+
   const productList = document.getElementById("productList");
+
+  const noProductsDiv = document.createElement("div");
+  noProductsDiv.classList.add("hide");
+  noProductsDiv.textContent = "No Product Found";
+  productList.appendChild(noProductsDiv);
+
+  let categoryList = [];
 
   const productArray = Array.from(products);
 
   productArray.forEach((product) => {
-    const productElement = document.createElement("div");
 
+    if(!categoryList.includes(product.category)){
+      categoryList.push(product.category);
+    }
+
+    console.log(categoryList);
+
+    const productElement = document.createElement("div");
     productElement.classList.add("product");
     productElement.classList.add("grid-item");
+
+
 
     //change below to template instead
     productElement.innerHTML = `
@@ -50,9 +66,27 @@ function displayProducts(products) {
         product.category.trim().toLowerCase().includes(value.toLowerCase());
 
         productElement.classList.toggle("hide", !isVisible);
-        
+        if(isVisible){
+          noProductsDiv.classList.add("hide");
+        } else{
+          let visibleProducts = Array.from(productList.getElementsByClassName("grid-item")).filter(product =>
+             !product.classList.contains("hide"))
+             if(visibleProducts.length===0){
+              noProductsDiv.classList.remove("hide");
+             }
+        }
       });
     }
   });
+
+  const selectBox = document.getElementById('categories');
+  for(let i=0; i<categoryList.length; i++){
+    const option = document.createElement('option');
+    option.text = categoryList[i];
+    selectBox.appendChild(option);
+  }
+
 }
+
+
 

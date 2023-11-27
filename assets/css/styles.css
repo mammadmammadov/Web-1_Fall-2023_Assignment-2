@@ -1,42 +1,10 @@
-.topnav {
-    overflow: hidden;
-    width:auto;
-  }
-  
-  .topnav a {
-    float: left;
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-  
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .topnav a.active {
-    background-color: #2196F3;
-    color: white;
-  }
-  
-  .topnav input[type=text] {
-    float:inherit;
-    padding: 6px;
-    margin-top: 8px;
-    margin-right: 16px;
-    border: none;
-    font-size: 17px;
-  }
 
 /* Main CSS BELOW */
 
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
+    background-color: #f7f7f7da;
 }
 
 .product {
@@ -74,7 +42,7 @@ p{
   .grid-item {
     background-color: #fff;
     border: 1px solid #ddd;
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    border-radius: 8px;
     padding: 5px;
     font-size: 30px;
     text-align:center;
