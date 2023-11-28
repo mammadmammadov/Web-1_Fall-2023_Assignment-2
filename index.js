@@ -1,9 +1,10 @@
-fetch("https://dummyjson.com/products")
+products=[]
+fetch("https://dummyjson.com/products?limit=100")
   .then((res) => {
     return res.json();
   })
   .then((data) => {
-    const products = data.products;
+    products = data.products;
     // console.log(products);
     displayProducts(products);
   })
@@ -63,7 +64,7 @@ function displayProducts(products) {
 
         const isVisible = product.title.trim().toLowerCase().includes(value.toLowerCase()) || 
         product.description.trim().toLowerCase().includes(value.toLowerCase()) ||
-        product.category.trim().toLowerCase().includes(value.toLowerCase());
+        product.category.trim().toLowerCase().includes(value.toLowerCase()) 
 
         productElement.classList.toggle("hide", !isVisible);
         if(isVisible){
@@ -77,7 +78,7 @@ function displayProducts(products) {
         }
       });
     }
-  });
+
 
   const selectBox = document.getElementById('categories');
   for(let i=0; i<categoryList.length; i++){
@@ -85,6 +86,27 @@ function displayProducts(products) {
     option.text = categoryList[i];
     selectBox.appendChild(option);
   }
+
+  // selectBox.addEventListener("change", (e) => {
+  //   const selectedElement = e.target.value;
+  //   isVisible = product.category == selectedElement;
+
+  //   productElement.classList.toggle("hide", !isVisible);
+  //       if(isVisible){
+  //         noProductsDiv.classList.add("hide");
+  //       } else{
+  //         visibleProducts = Array.from(visibleProducts.getElementsByClassName("grid-item")).filter(product =>
+  //            !product.classList.contains("hide"))
+  //            if(visibleProducts.length===0){
+  //             noProductsDiv.classList.remove("hide");
+  //            }
+  //       }
+
+  // })
+
+  });
+
+  
 
 }
 
