@@ -63,7 +63,7 @@ p{
 
 select{
   margin: 20px;
-  height: 2em;
+  height: 3em;
   border-radius: 0.25rem;
   background-color: #f6efef;
 }
@@ -76,6 +76,7 @@ option {
     background-color: rgb(204, 219, 234);
   }
 
-label{
-  font-size: large;
-}
+select {
+    padding: 8px;
+    font-size: 14px;
+  }
