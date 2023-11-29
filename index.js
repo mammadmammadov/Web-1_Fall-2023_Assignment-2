@@ -67,16 +67,16 @@ function main() {
       searchInput.addEventListener("keyup", searchFilterHandler);
     }
 
-    selectBox.addEventListener("change", handleFilterChange);
+    selectBox.addEventListener("change", searchFilterHandler);
 
     function searchFilterHandler(){
-      const searchValue = searchInput.value.trim().toLowerCase();
-      const selectedCategory = selectBox.value.trim().toLowerCase();
+      const searchValue = searchInput.value.toLowerCase();
+      const selectedCategory = selectBox.value.toLowerCase();
 
       products.forEach(product => {
         const searchMatch = product.title.toLowerCase().includes(searchValue) ||
         product.description.toLowerCase().includes(searchValue)||
-        product.category.toLowerCase().includes(selectedCategory);
+        product.category.toLowerCase().includes(searchValue);
 
         const selectCategoryMatch = selectedCategory === "all" || product.category.toLowerCase()===selectedCategory;
 
@@ -86,13 +86,7 @@ function main() {
       })
       updateVisibility();
   }
-
-  function handleFilterChange() {
-    // Call the handleSearch function to update the product visibility
-    searchFilterHandler();
-  }
-
-
+  
   function updateVisibility(){
     const visibleProducts = 
     Array.from(productList.getElementsByClassName("grid-item")).filter(product =>
