@@ -1,4 +1,4 @@
-products=[]
+products = [];
 fetch("https://dummyjson.com/products?limit=100")
   .then((res) => {
     return res.json();
@@ -6,15 +6,16 @@ fetch("https://dummyjson.com/products?limit=100")
   .then((data) => {
     products = data.products;
     // console.log(products);
-    displayProducts(products);
+    main();
   })
   .catch((error) => {
     console.error("Error while getting the data", error);
   });
 
-function displayProducts(products) {
 
+function main() {
   const productList = document.getElementById("productList");
+  const selectBox = document.getElementById("categories");
 
   const noProductsDiv = document.createElement("div");
   noProductsDiv.classList.add("hide");
@@ -23,21 +24,14 @@ function displayProducts(products) {
 
   let categoryList = [];
 
-  const productArray = Array.from(products);
-
-  productArray.forEach((product) => {
-
-    if(!categoryList.includes(product.category)){
+  products.forEach((product) => {
+    if (!categoryList.includes(product.category)) {
       categoryList.push(product.category);
     }
 
-    console.log(categoryList);
-
     const productElement = document.createElement("div");
-    productElement.classList.add("product");
-    productElement.classList.add("grid-item");
-
-
+    productElement.classList.add("product", "grid-item");
+    productElement.setAttribute("data-id", product.id);
 
     //change below to template instead
     productElement.innerHTML = `
@@ -55,60 +49,62 @@ function displayProducts(products) {
     });
 
     productList.appendChild(productElement);
+  })
 
-    //Below Searching Function is Implemented
-    const searchInput = document.querySelector("[data-search]");
-    if (searchInput != null) {
-      searchInput.addEventListener("keyup", (e) => {
-        const value = e.target.value;
+  const allOption = document.createElement("option");
+  allOption.text = "All";
+  selectBox.appendChild(allOption);
 
-        const isVisible = product.title.trim().toLowerCase().includes(value.toLowerCase()) || 
-        product.description.trim().toLowerCase().includes(value.toLowerCase()) ||
-        product.category.trim().toLowerCase().includes(value.toLowerCase()) 
-
-        productElement.classList.toggle("hide", !isVisible);
-        if(isVisible){
-          noProductsDiv.classList.add("hide");
-        } else{
-          let visibleProducts = Array.from(productList.getElementsByClassName("grid-item")).filter(product =>
-             !product.classList.contains("hide"))
-             if(visibleProducts.length===0){
-              noProductsDiv.classList.remove("hide");
-             }
-        }
-      });
-    }
-
-
-  const selectBox = document.getElementById('categories');
-  for(let i=0; i<categoryList.length; i++){
-    const option = document.createElement('option');
-    option.text = categoryList[i];
+  for (let i = 0; i < categoryList.length; i++) {
+    const option = document.createElement("option");
+    option.text = categoryList.sort()[i];
     selectBox.appendChild(option);
   }
 
-  // selectBox.addEventListener("change", (e) => {
-  //   const selectedElement = e.target.value;
-  //   isVisible = product.category == selectedElement;
+    //Below Searching and Filtering Functions are Implemented
+    const searchInput = document.querySelector("[data-search]");
+    if (searchInput != null) {
+      searchInput.addEventListener("keyup", searchFilterHandler);
+    }
 
-  //   productElement.classList.toggle("hide", !isVisible);
-  //       if(isVisible){
-  //         noProductsDiv.classList.add("hide");
-  //       } else{
-  //         visibleProducts = Array.from(visibleProducts.getElementsByClassName("grid-item")).filter(product =>
-  //            !product.classList.contains("hide"))
-  //            if(visibleProducts.length===0){
-  //             noProductsDiv.classList.remove("hide");
-  //            }
-  //       }
+    selectBox.addEventListener("change", handleFilterChange);
 
-  // })
+    function searchFilterHandler(){
+      const searchValue = searchInput.value.trim().toLowerCase();
+      const selectedCategory = selectBox.value.trim().toLowerCase();
 
-  });
+      products.forEach(product => {
+        const searchMatch = product.title.toLowerCase().includes(searchValue) ||
+        product.description.toLowerCase().includes(searchValue)||
+        product.category.toLowerCase().includes(selectedCategory);
 
-  
+        const selectCategoryMatch = selectedCategory === "all" || product.category.toLowerCase()===selectedCategory;
+
+        const isVisible = searchMatch && selectCategoryMatch;
+        const productElement = productList.querySelector(`[data-id="${product.id}"]`);
+        productElement.classList.toggle("hide", !isVisible);
+      })
+      updateVisibility();
+  }
+
+  function handleFilterChange() {
+    // Call the handleSearch function to update the product visibility
+    searchFilterHandler();
+  }
+
+
+  function updateVisibility(){
+    const visibleProducts = 
+    Array.from(productList.getElementsByClassName("grid-item")).filter(product =>
+      !product.classList.contains("hide"))
+
+    if(visibleProducts.length===0){
+      noProductsDiv.classList.remove("hide");
+    }
+    else{
+      noProductsDiv.classList.add("hide")
+    }
+  }
 
 }
-
-
 

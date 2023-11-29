@@ -1,16 +1,16 @@
+function searchProduct(){
 const searchInput = document.querySelector("[data-search]");
 if (searchInput != null) {
   searchInput.addEventListener("keyup", (e) => {
     const value = e.target.value;
 
-    for(let i=0; i<productList.length; i++){
-        product  = productList[i];
-    }
+    products.forEach((product) => {
+
     const isVisible = product.title.trim().toLowerCase().includes(value.toLowerCase()) || 
     product.description.trim().toLowerCase().includes(value.toLowerCase()) ||
     product.category.trim().toLowerCase().includes(value.toLowerCase());
 
-    productElement.classList.toggle("hide", !isVisible);
+    product.classList.toggle("hide", !isVisible);
     if(isVisible){
       noProductsDiv.classList.add("hide");
     } else{
@@ -21,12 +21,13 @@ if (searchInput != null) {
          }
     }
   });
-}
-});
+})
 
 const selectBox = document.getElementById('categories');
 for(let i=0; i<categoryList.length; i++){
 const option = document.createElement('option');
 option.text = categoryList[i];
 selectBox.appendChild(option);
+}
+}
 }

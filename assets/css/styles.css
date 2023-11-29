@@ -59,3 +59,23 @@ p{
   .hide{
     display: none;
   }
+
+
+select{
+  margin: 20px;
+  height: 2em;
+  border-radius: 0.25rem;
+  background-color: #f6efef;
+}
+
+select::after{
+  background-color: aqua;
+}
+
+option {
+    background-color: rgb(204, 219, 234);
+  }
+
+label{
+  font-size: large;
+}
