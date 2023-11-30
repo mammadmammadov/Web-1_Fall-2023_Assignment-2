@@ -5,7 +5,6 @@ fetch("https://dummyjson.com/products?limit=100")
   })
   .then((data) => {
     products = data.products;
-    // console.log(products);
     main();
   })
   .catch((error) => {
@@ -17,10 +16,10 @@ function main() {
   const productList = document.getElementById("productList");
   const selectBox = document.getElementById("categories");
 
-  const noProductsDiv = document.createElement("div");
-  noProductsDiv.classList.add("hide");
-  noProductsDiv.textContent = "No Product Found";
-  productList.appendChild(noProductsDiv);
+  const noProductsElement = document.createElement("div");
+  noProductsElement.classList.add("hide");
+  noProductsElement.textContent = "No Product Found 😞";
+  productList.appendChild(noProductsElement);
 
   let categoryList = [];
 
@@ -31,9 +30,11 @@ function main() {
 
     const productElement = document.createElement("div");
     productElement.classList.add("product", "grid-item");
+
+    //adding data-id attribute and assigning product.id to it
     productElement.setAttribute("data-id", product.id);
 
-    //change below to template instead
+    //TODO: change below to template instead
     productElement.innerHTML = `
                 <h4 class="product-id">${product.id}</h4>
                 <h3>${product.title}</h3>
@@ -44,17 +45,18 @@ function main() {
                 <img src="${product.thumbnail}" alt="${product.title}">`;
 
     productElement.addEventListener("click", function () {
-      const productInfoURL = `product_info.html?id=${product.id}`;
-      window.open(productInfoURL, "_blank");
+      window.open(`product_info.html?id=${product.id}`, "_blank");
     });
 
     productList.appendChild(productElement);
   })
 
+  //adding the option "All" to select-box
   const allOption = document.createElement("option");
   allOption.text = "All";
   selectBox.appendChild(allOption);
 
+  //adding all categories to select box in alphabetical order
   for (let i = 0; i < categoryList.length; i++) {
     const option = document.createElement("option");
     option.text = categoryList.sort()[i];
@@ -62,7 +64,7 @@ function main() {
   }
 
     //Below Searching and Filtering Functions are Implemented
-    const searchInput = document.querySelector("[data-search]");
+    const searchInput = document.querySelector(".search-input");
     if (searchInput != null) {
       searchInput.addEventListener("keyup", searchFilterHandler);
     }
@@ -82,6 +84,8 @@ function main() {
 
         const isVisible = searchMatch && selectCategoryMatch;
         const productElement = productList.querySelector(`[data-id="${product.id}"]`);
+
+        //when elements does not match with the input, then they will be invisible 
         productElement.classList.toggle("hide", !isVisible);
       })
       updateVisibility();
@@ -93,10 +97,10 @@ function main() {
       !product.classList.contains("hide"))
 
     if(visibleProducts.length===0){
-      noProductsDiv.classList.remove("hide");
+      noProductsElement.classList.remove("hide");
     }
     else{
-      noProductsDiv.classList.add("hide")
+      noProductsElement.classList.add("hide")
     }
   }
 

@@ -8,23 +8,27 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/search_bar.css" />
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
   </head>
   <body>
     <div class="search-bar">
-      <input type="text" data-search placeholder="Search Products..." class="search-input">
-   </div>
+      <input
+        type="text"
+        placeholder="Search Products..."
+        class="search-input"
+      />
+    </div>
 
-    <label for="productCategories">Choose a category:</label>
-    <select name="productCategories" id="categories">
-    </select>
+    <label for="categories">Choose a category:</label>
+    <select name="productCategories" id="categories"></select>
 
     <div class="grid-container" id="productList"></div>
 
+    <div id="pagination"></div>
+
+    <!-- adding js files -->
     <script src="index.js"></script>
     <script src="product_info.js"></script>
-    <!-- <script src="search.js"></script> -->
   </body>
 </html>
