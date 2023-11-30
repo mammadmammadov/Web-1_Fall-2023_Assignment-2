@@ -21,7 +21,7 @@ function displaySingleProduct(){
           productInfoSet.querySelector("#pictures");
         product.images.map((image) => {
           const pic = document.createElement("img");
-          [pic.src, pic.alt] = [image, product.description];
+          [pic.src, pic.alt] = [image, product.title];
           imageSet.appendChild(pic);
         });
       }).catch((error) => {

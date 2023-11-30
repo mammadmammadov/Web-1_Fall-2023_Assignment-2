@@ -73,7 +73,7 @@ select::after{
 }
 
 option {
-    background-color: rgb(204, 219, 234);
+    background-color: rgb(224, 234, 204);
   }
 
 select {
@@ -84,4 +84,14 @@ select {
   label{
     font-weight: bold;
     font-size: large;
+  }
+
+  h1{
+    text-align: center;
+    margin: 1%;
+  }
+
+  .no-product{
+    text-align: center;
+    font-size: xx-large;
   }

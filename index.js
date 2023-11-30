@@ -17,6 +17,7 @@ function main() {
   const selectBox = document.getElementById("categories");
 
   const noProductsElement = document.createElement("div");
+  noProductsElement.className = 'no-product'
   noProductsElement.classList.add("hide");
   noProductsElement.textContent = "No Product Found 😞";
   productList.appendChild(noProductsElement);
@@ -85,13 +86,15 @@ function main() {
         const isVisible = searchMatch && selectCategoryMatch;
         const productElement = productList.querySelector(`[data-id="${product.id}"]`);
 
-        //when elements does not match with the input, then they will be invisible 
+        //when element does not match with the input, then it will be invisible 
         productElement.classList.toggle("hide", !isVisible);
       })
       updateVisibility();
-  }
+  } 
   
   function updateVisibility(){
+
+    //restricting by class grid-item as noProductsElement has been added to productList
     const visibleProducts = 
     Array.from(productList.getElementsByClassName("grid-item")).filter(product =>
       !product.classList.contains("hide"))
