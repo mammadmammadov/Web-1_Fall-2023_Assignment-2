@@ -15,6 +15,9 @@ fetch("https://dummyjson.com/products?limit=100")
 function main() {
   const productList = document.getElementById("productList");
   const selectBox = document.getElementById("categories");
+  const paginationContainer = document.getElementById("pagination");
+  let currentPage = 1;
+  let visibleProducts = [];
 
   const noProductsElement = document.createElement("div");
   noProductsElement.className = 'no-product'
@@ -73,6 +76,7 @@ function main() {
     selectBox.addEventListener("change", searchFilterHandler);
 
     function searchFilterHandler(){
+      currentPage = 1;
       const searchValue = searchInput.value.toLowerCase();
       const selectedCategory = selectBox.value.toLowerCase();
 
@@ -90,12 +94,13 @@ function main() {
         productElement.classList.toggle("hide", !isVisible);
       })
       updateVisibility();
+      updatePagination();
   } 
   
   function updateVisibility(){
 
-    //restricting by class grid-item as noProductsElement has been added to productList
-    const visibleProducts = 
+    //restricting by class grid-item as noProductsElement has already been added to productList
+    visibleProducts = 
     Array.from(productList.getElementsByClassName("grid-item")).filter(product =>
       !product.classList.contains("hide"))
 
@@ -107,5 +112,50 @@ function main() {
     }
   }
 
-}
+  function updatePagination() {
+
+    let temp = 0;
+    visibleProducts.forEach(product=>{
+      product.setAttribute("product-per-page", temp++)
+    })
+
+    const totalPages = Math.ceil(visibleProducts.length / 10);
+    paginationContainer.innerHTML = "";
+  
+    for (let i = 1; i <= totalPages; i++) {
+      const pageLink = document.createElement("a");
+      pageLink.href = "#";
+      pageLink.textContent = i;
+      pageLink.addEventListener("click", function () {
+        currentPage = i;
+        updatePage();
+        updatePagination();
+      });
+  
+      if (i === currentPage) {
+        pageLink.classList.add("active");
+      }
+  
+      paginationContainer.appendChild(pageLink);
+    }
+  }
+  
+    function updatePage() {
+      const startIndex = (currentPage - 1) * 10;
+      const endIndex = startIndex + 10;
+  
+      products.forEach((product, index) => {
+        const productElement = productList.querySelector(
+          `[product-per-page="${index}}"]`
+        );
+        const isVisible = index >= startIndex && index < endIndex;
+        productElement.classList.toggle("hide", !isVisible);
+      });
+    }
+  
+    updateVisibility();
+    updatePagination();
+    updatePage();
+  }
+
 
