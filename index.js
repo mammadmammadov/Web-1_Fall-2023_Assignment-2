@@ -1,4 +1,5 @@
 products = [];
+let currentPage = 1;
 fetch("https://dummyjson.com/products?limit=100")
   .then((res) => {
     return res.json();
@@ -11,16 +12,14 @@ fetch("https://dummyjson.com/products?limit=100")
     console.error("Error while getting the data", error);
   });
 
-
 function main() {
   const productList = document.getElementById("productList");
   const selectBox = document.getElementById("categories");
   const paginationContainer = document.getElementById("pagination");
-  let currentPage = 1;
   let visibleProducts = [];
 
   const noProductsElement = document.createElement("div");
-  noProductsElement.className = 'no-product'
+  noProductsElement.className = "no-product";
   noProductsElement.classList.add("hide");
   noProductsElement.textContent = "No Product Found 😞";
   productList.appendChild(noProductsElement);
@@ -53,7 +52,7 @@ function main() {
     });
 
     productList.appendChild(productElement);
-  })
+  });
 
   //adding the option "All" to select-box
   const allOption = document.createElement("option");
@@ -67,95 +66,94 @@ function main() {
     selectBox.appendChild(option);
   }
 
-    //Below Searching and Filtering Functions are Implemented
-    const searchInput = document.querySelector(".search-input");
-    if (searchInput != null) {
-      searchInput.addEventListener("keyup", searchFilterHandler);
-    }
+  //Below Searching and Filtering Functions are Implemented
+  const searchInput = document.querySelector(".search-input");
+  if (searchInput != null) {
+    searchInput.addEventListener("keyup", searchFilterHandler);
+  }
 
-    selectBox.addEventListener("change", searchFilterHandler);
+  selectBox.addEventListener("change", searchFilterHandler);
 
-    function searchFilterHandler(){
-      currentPage = 1;
-      const searchValue = searchInput.value.toLowerCase();
-      const selectedCategory = selectBox.value.toLowerCase();
+  function searchFilterHandler() {
+    currentPage = 1;
+    const searchValue = searchInput.value.toLowerCase();
+    const selectedCategory = selectBox.value.toLowerCase();
 
-      products.forEach(product => {
-        const searchMatch = product.title.toLowerCase().includes(searchValue) ||
-        product.description.toLowerCase().includes(searchValue)||
+    products.forEach((product) => {
+      const searchMatch =
+        product.title.toLowerCase().includes(searchValue) ||
+        product.description.toLowerCase().includes(searchValue) ||
         product.category.toLowerCase().includes(searchValue);
 
-        const selectCategoryMatch = selectedCategory === "all" || product.category.toLowerCase()===selectedCategory;
+      const selectCategoryMatch =
+        selectedCategory === "all" ||
+        product.category.toLowerCase() === selectedCategory;
 
-        const isVisible = searchMatch && selectCategoryMatch;
-        const productElement = productList.querySelector(`[data-id="${product.id}"]`);
+      const isVisible = searchMatch && selectCategoryMatch;
+      const productElement = productList.querySelector(
+        `[data-id="${product.id}"]`
+      );
 
-        //when element does not match with the input, then it will be invisible 
-        productElement.classList.toggle("hide", !isVisible);
-      })
-      updateVisibility();
-      updatePagination();
-  } 
-  
-  function updateVisibility(){
-
-    //restricting by class grid-item as noProductsElement has already been added to productList
-    visibleProducts = 
-    Array.from(productList.getElementsByClassName("grid-item")).filter(product =>
-      !product.classList.contains("hide"))
-
-    if(visibleProducts.length===0){
-      noProductsElement.classList.remove("hide");
-    }
-    else{
-      noProductsElement.classList.add("hide")
-    }
+      //when element does not match with the input, then it will be invisible
+      productElement.classList.toggle("hide", !isVisible);
+    });
+    updateVisibility();
+    pagination();
   }
 
-  function updatePagination() {
+  function updateVisibility() {
+    //restricting by class grid-item as noProductsElement has already been added to productList
+    visibleProducts = Array.from(
+      productList.getElementsByClassName("grid-item")
+    ).filter((product) => !product.classList.contains("hide"));
 
-    let temp = 0;
-    visibleProducts.forEach(product=>{
-      product.setAttribute("product-per-page", temp++)
-    })
+    if (visibleProducts.length === 0) {
+      noProductsElement.classList.remove("hide");
+    } else {
+      noProductsElement.classList.add("hide");
+    }
+    console.log("Number of visible products: " + visibleProducts.length);
+  }
 
-    const totalPages = Math.ceil(visibleProducts.length / 10);
+  function pagination() {
+    const totalPages = Math.ceil(visibleProducts.length/10);
     paginationContainer.innerHTML = "";
-  
-    for (let i = 1; i <= totalPages; i++) {
+    for(let i=1; i<=totalPages; i++){
       const pageLink = document.createElement("a");
-      pageLink.href = "#";
+      pageLink.href = '#';
       pageLink.textContent = i;
-      pageLink.addEventListener("click", function () {
+      pageLink.addEventListener('click', ()=>{
         currentPage = i;
         updatePage();
-        updatePagination();
+        pagination();
       });
-  
-      if (i === currentPage) {
+      if(i===currentPage){
         pageLink.classList.add("active");
       }
-  
       paginationContainer.appendChild(pageLink);
+
     }
   }
-  
+
+
     function updatePage() {
       const startIndex = (currentPage - 1) * 10;
       const endIndex = startIndex + 10;
-  
+
       products.forEach((product, index) => {
         const productElement = productList.querySelector(
-          `[product-per-page="${index}}"]`
+          `[data-id="${product.id}"]`
         );
         const isVisible = index >= startIndex && index < endIndex;
         productElement.classList.toggle("hide", !isVisible);
       });
     }
-  
-    updateVisibility();
-    updatePagination();
-    updatePage();
-  }
 
+  //   updateVisibility();
+  //   updatePagination();
+  //   updatePage();
 
+  updateVisibility();
+  pagination();
+  updatePage();
+}
