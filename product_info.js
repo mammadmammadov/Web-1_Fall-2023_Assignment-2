@@ -2,13 +2,15 @@ document.addEventListener("DOMContentLoaded", displaySingleProduct())
 
 function displaySingleProduct(){
   const productId = new URLSearchParams(window.location.search).get("id");
+  if(productId!=null){
   const url = `https://dummyjson.com/products/${productId}`
   fetch(url)
       .then((res) => res.json())
       .then((product) => {
         const productInfoSet = document.getElementById("productInfoSet");
+        
         productInfoSet.innerHTML = `
-              <h3>${product.title}</h3>
+              <h4>${product.title}</h4>
               <p style="font-weight:bold">${product.brand}</p>
               <p>${product.description}</p>
               <p>Price: $${product.price}</p>
@@ -27,5 +29,6 @@ function displaySingleProduct(){
       }).catch((error) => {
         console.log("Error while getting the product", error);
       })
+}
 }
 

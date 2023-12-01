@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .grid-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    width: max-content;
+    text-align: left;
+  }
+  
+  .title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .price, .discount, .category, .stock {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #555;
+  }
+
+  #pictures{
+    max-width: 100px;
+    max-height: 100px;;
+  }

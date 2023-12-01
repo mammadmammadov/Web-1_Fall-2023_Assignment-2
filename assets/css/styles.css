@@ -1,35 +1,57 @@
+/* Title */
 
-/* Main CSS BELOW */
+h1 {
+  font-family: "Brush Script MT";
+  text-align: center;
+  margin: 1%;
+  font-size: xxx-large;
+}
+
+/* Search Bar */
+
+.search-bar {
+  margin: 20px 0;
+}
+
+.search-input {
+  width: 95%;
+  padding: 12px;
+  border: 1px solid #555555;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Body */
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f7f7f7da;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f7f7f7da;
 }
 
 .product {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
+  border: 1px solid #ccc;
+  padding: 100px;
+  margin-bottom: 10px;
 }
 
-.product:hover{
-    background-color: rgb(255, 204, 0);
-    cursor: pointer;
+.product:hover {
+  background-color: rgb(255, 179, 64);
+  cursor: pointer;
 }
 
 img {
-    width:200px;
-    height: 200px;
+  width: 150px;
+  height: 150px;
 }
 
-.images{
+.images {
   width: 200px;
   height: 200px;
 }
 
-p{
-    font-size: medium;
+p {
+  font-size: medium;
 }
 
 .grid-container {
@@ -37,94 +59,99 @@ p{
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 20px;
   padding: 20px;
-  }
-  
-  .grid-item {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 5px;
-    font-size: 30px;
-    text-align:center;
-  }
+}
 
-  .test{
-    background-color: green;
-  }
+.grid-item {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 20px;
+  padding: 20px;
+  width: 300px;
+}
 
-  .product-id{
-    display: none;
-  }
+.grid-item:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
 
-  .hide{
-    display: none;
-  }
+.grid-item h3 {
+  margin: 0 0 10px;
+  font-size: 1.5rem;
+}
+
+.product-item p {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+.grid-item img {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 10%;
+}
 
 
-select{
+select {
   margin: 20px;
   height: 3em;
   border-radius: 0.25rem;
   background-color: #f6efef;
 }
 
-select::after{
+select::after {
   background-color: aqua;
 }
 
 option {
-    background-color: rgb(224, 234, 204);
-  }
+  background-color: rgb(224, 234, 204);
+}
 
 select {
-    padding: 8px;
-    font-size: 14px;
-  }
+  padding: 8px;
+  font-size: 14px;
+}
 
-  label{
-    font-weight: bold;
-    font-size: large;
-  }
+label {
+  font-weight: bold;
+  font-size: large;
+}
 
-  h1{
-    text-align: center;
-    margin: 1%;
-  }
+.no-product {
+  text-align: center;
+  font-size: xx-large;
+}
 
-  .no-product{
-    text-align: center;
-    font-size: xx-large;
-  }
+/* CSS for Pagination */
 
-  /* CSS for Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
-  .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .pagination a {
-    padding: 8px 12px;
-    margin: 0 5px;
-    text-decoration: none;
-    color: #333;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .pagination a.active {
-    background-color: #4caf50;
-    color: white;
-    border: 1px solid #4caf50;
-  }
-  
-  .pagination a:hover {
-    background-color: #ddd;
-  }
+.pagination a {
+  padding: 8px 12px;
+  margin: 0 5px;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
-  /* Youtube */
+.pagination a.active {
+  background-color: #4caf50;
+  color: white;
+  border: 1px solid #4caf50;
+}
 
+.pagination a:hover {
+  background-color: #ddd;
+}
 
-  
+/* Youtube */
+
+.hide {
+  display: none;
+}

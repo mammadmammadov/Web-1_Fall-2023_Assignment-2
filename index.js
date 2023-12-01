@@ -39,7 +39,6 @@ function main() {
 
     //TODO: change below to template instead
     productElement.innerHTML = `
-                <h4 class="product-id">${product.id}</h4>
                 <h3>${product.title}</h3>
                 <p>Price: $${product.price}</p>
                 <p>Discount: ${product.discountPercentage}%</p>
@@ -98,7 +97,7 @@ function main() {
       productElement.classList.toggle("hide", !isVisible);
     });
     updateVisibility();
-    pagination();
+    paginationCore();
     updatePage();
   }
 
@@ -113,10 +112,9 @@ function main() {
     } else {
       noProductsElement.classList.add("hide");
     }
-    console.log("Number of visible products: " + visibleProducts.length);
   }
 
-  function pagination() {
+  function paginationCore() {
     const totalPages = Math.ceil(visibleProducts.length/10);
     paginationContainer.innerHTML = "";
     for(let i=1; i<=totalPages; i++){
@@ -126,7 +124,7 @@ function main() {
       pageLink.addEventListener('click', ()=>{
         currentPage = i;
         updatePage();
-        pagination();
+        paginationCore();
       });
       if(i===currentPage){
         pageLink.classList.add("active");
@@ -141,27 +139,15 @@ function main() {
       const startIndex = (currentPage - 1) * 10;
       const endIndex = startIndex + 10;
 
-      // visibleProducts.forEach((product, index) => {
-        // const productElement = productList.querySelector(
-        //   `[data-id="${product.id}"]`
-        // );
-      //   const productElement = visibleProducts[index];
-      //   const isVisible = index >= startIndex && index < endIndex;
-      //   productElement.classList.toggle("hide", !isVisible);
-      // });
       for(let i=0; i<visibleProducts.length; i++){
         const productElement = visibleProducts[i];
         const isVisible = i >= startIndex && i < endIndex;
         productElement.classList.toggle("hide", !isVisible);
-        console.log(productElement);
       }
     }
 
-  //   updateVisibility();
-  //   updatePagination();
-  //   updatePage();
 
   updateVisibility();
-  pagination();
+  paginationCore();
   updatePage();
 }
