@@ -99,6 +99,7 @@ function main() {
     });
     updateVisibility();
     pagination();
+    updatePage();
   }
 
   function updateVisibility() {
@@ -140,13 +141,20 @@ function main() {
       const startIndex = (currentPage - 1) * 10;
       const endIndex = startIndex + 10;
 
-      products.forEach((product, index) => {
-        const productElement = productList.querySelector(
-          `[data-id="${product.id}"]`
-        );
-        const isVisible = index >= startIndex && index < endIndex;
+      // visibleProducts.forEach((product, index) => {
+        // const productElement = productList.querySelector(
+        //   `[data-id="${product.id}"]`
+        // );
+      //   const productElement = visibleProducts[index];
+      //   const isVisible = index >= startIndex && index < endIndex;
+      //   productElement.classList.toggle("hide", !isVisible);
+      // });
+      for(let i=0; i<visibleProducts.length; i++){
+        const productElement = visibleProducts[i];
+        const isVisible = i >= startIndex && i < endIndex;
         productElement.classList.toggle("hide", !isVisible);
-      });
+        console.log(productElement);
+      }
     }
 
   //   updateVisibility();
