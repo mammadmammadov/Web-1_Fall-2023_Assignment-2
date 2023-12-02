@@ -11,7 +11,7 @@ function displaySingleProduct(){
         
         productInfoSet.innerHTML = `
               <h4>${product.title}</h4>
-              <p style="font-weight:bold">${product.brand}</p>
+              <p class="brand">${product.brand}</p>
               <p>${product.description}</p>
               <p>Price: $${product.price}</p>
               <p>Discount: ${product.discountPercentage}%</p>
@@ -23,7 +23,10 @@ function displaySingleProduct(){
           productInfoSet.querySelector("#pictures");
         product.images.map((image) => {
           const pic = document.createElement("img");
+
+          //destructuring assignment
           [pic.src, pic.alt] = [image, product.title];
+          
           imageSet.appendChild(pic);
         });
       }).catch((error) => {

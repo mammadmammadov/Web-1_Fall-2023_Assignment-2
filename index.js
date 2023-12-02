@@ -32,7 +32,7 @@ function main() {
     }
 
     const productElement = document.createElement("div");
-    productElement.classList.add("product", "grid-item");
+    productElement.classList.add("grid-item");
 
     //adding data-id attribute and assigning product.id to it
     productElement.setAttribute("data-id", product.id);
@@ -84,11 +84,11 @@ function main() {
         product.description.toLowerCase().includes(searchValue) ||
         product.category.toLowerCase().includes(searchValue);
 
-      const selectCategoryMatch =
+      const categoryMatch =
         selectedCategory === "all" ||
         product.category.toLowerCase() === selectedCategory;
 
-      const isVisible = searchMatch && selectCategoryMatch;
+      const isVisible = searchMatch && categoryMatch;
       const productElement = productList.querySelector(
         `[data-id="${product.id}"]`
       );
@@ -107,11 +107,8 @@ function main() {
       productList.getElementsByClassName("grid-item")
     ).filter((product) => !product.classList.contains("hide"));
 
-    if (visibleProducts.length === 0) {
-      noProductsElement.classList.remove("hide");
-    } else {
-      noProductsElement.classList.add("hide");
-    }
+    let zeroVisibleProducts  = visibleProducts.length === 0;
+    noProductsElement.classList.toggle("hide", !zeroVisibleProducts);
   }
 
   function paginationCore() {
@@ -140,9 +137,9 @@ function main() {
       const endIndex = startIndex + 10;
 
       for(let i=0; i<visibleProducts.length; i++){
-        const productElement = visibleProducts[i];
+        const product = visibleProducts[i];
         const isVisible = i >= startIndex && i < endIndex;
-        productElement.classList.toggle("hide", !isVisible);
+        product.classList.toggle("hide", !isVisible);
       }
     }
 
