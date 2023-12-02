@@ -107,42 +107,39 @@ function main() {
       productList.getElementsByClassName("grid-item")
     ).filter((product) => !product.classList.contains("hide"));
 
-    let zeroVisibleProducts  = visibleProducts.length === 0;
+    let zeroVisibleProducts = visibleProducts.length === 0;
     noProductsElement.classList.toggle("hide", !zeroVisibleProducts);
   }
 
   function paginationCore() {
-    const totalPages = Math.ceil(visibleProducts.length/10);
+    const totalPages = Math.ceil(visibleProducts.length / 10);
     paginationContainer.innerHTML = "";
-    for(let i=1; i<=totalPages; i++){
+    for (let i = 1; i <= totalPages; i++) {
       const pageLink = document.createElement("a");
-      pageLink.href = '#';
+      pageLink.href = "#";
       pageLink.textContent = i;
-      pageLink.addEventListener('click', ()=>{
+      pageLink.addEventListener("click", () => {
         currentPage = i;
         updatePage();
         paginationCore();
       });
-      if(i===currentPage){
+      if (i === currentPage) {
         pageLink.classList.add("active");
       }
       paginationContainer.appendChild(pageLink);
-
     }
   }
 
+  function updatePage() {
+    const startIndex = (currentPage - 1) * 10;
+    const endIndex = startIndex + 10;
 
-    function updatePage() {
-      const startIndex = (currentPage - 1) * 10;
-      const endIndex = startIndex + 10;
-
-      for(let i=0; i<visibleProducts.length; i++){
-        const product = visibleProducts[i];
-        const isVisible = i >= startIndex && i < endIndex;
-        product.classList.toggle("hide", !isVisible);
-      }
+    for (let i = 0; i < visibleProducts.length; i++) {
+      const product = visibleProducts[i];
+      const isVisible = i >= startIndex && i < endIndex;
+      product.classList.toggle("hide", !isVisible);
     }
-
+  }
 
   updateVisibility();
   paginationCore();
