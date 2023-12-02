@@ -5,7 +5,12 @@ function displaySingleProduct() {
   if (productId != null) {
     const url = `https://dummyjson.com/products/${productId}`;
     fetch(url)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new ResponseError('Bad fetch response', res);
+        }
+        return res.json()
+      })
       .then((product) => {
         const productInfoSet = document.getElementById("productInfoSet");
 
