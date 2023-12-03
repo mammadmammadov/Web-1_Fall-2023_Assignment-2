@@ -104,6 +104,8 @@ function main() {
     updatePage();
   }
 
+  //show or hide "no product found" message
+
   function updateVisibility() {
     //restricting by class grid-item as noProductsElement has already been added to productList
     visibleProducts = Array.from(
