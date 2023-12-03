@@ -1,7 +1,10 @@
-products = [];
+let products = [];
 let currentPage = 1;
 fetch("https://dummyjson.com/products?limit=100")
   .then((res) => {
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
     return res.json();
   })
   .then((data) => {
@@ -26,6 +29,7 @@ function main() {
 
   let categoryList = [];
 
+  //Displaying all products
   products.forEach((product) => {
     if (!categoryList.includes(product.category)) {
       categoryList.push(product.category);
@@ -37,7 +41,6 @@ function main() {
     //adding data-id attribute and assigning product.id to it
     productElement.setAttribute("data-id", product.id);
 
-    //TODO: change below to template instead
     productElement.innerHTML = `
                 <h3>${product.title}</h3>
                 <p>Price: $${product.price}</p>
