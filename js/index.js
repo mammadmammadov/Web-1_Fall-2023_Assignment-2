@@ -29,8 +29,8 @@ function main() {
 
   let categoryList = [];
 
-  //Displaying all products
   products.forEach((product) => {
+    //Getting categories
     if (!categoryList.includes(product.category)) {
       categoryList.push(product.category);
     }
