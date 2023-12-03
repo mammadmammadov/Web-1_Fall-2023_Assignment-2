@@ -7,6 +7,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: medium;
 }
 
 /* Title */
@@ -55,4 +57,10 @@ img {
   width: 150px;
   height: 150px;
   border-radius: 8px;
+  filter: grayscale(100);
+  transition: all .5s;
+}
+
+img:hover{
+  filter: grayscale(0);
 }
