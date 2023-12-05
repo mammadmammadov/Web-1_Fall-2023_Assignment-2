@@ -78,7 +78,7 @@ function main() {
 
   function searchFilterHandler() {
     currentPage = 1;
-    const searchValue = searchInput.value.toLowerCase();
+    const searchValue = searchInput.value.trim().toLowerCase();
     const selectedCategory = selectBox.value.toLowerCase();
 
     products.forEach((product) => {
